@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="index.js"></script>
+  <meta charset="UTF-8" />
+  <title>WebChatlify</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Update the href to point to the ICO file -->
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #000000; /* Set background color to black */
+      color: #ffffff; /* Set text color to white */
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 5rem; /* Increased font size for WebChatlify */
+      margin-bottom: 2rem; /* Added some margin below the header */
+    }
+
+    .logophoto {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      height: 80px;
+      background-color: #0a66c8;
+      color: #fff;
+      font-size: 2.75rem;
+      font-weight: 900;
+      border-radius: 5px;
+    }
+
+    .logoname {
+      font-weight: 900;
+      color: #fff;
+      margin-right: 20px; /* Added margin-right for horizontal spacing */
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 1rem; /* Reduced margin below the navigation links */
+      padding-bottom: 1rem; /* Added padding to space out the links */
+      border-bottom: 2px solid #007bff; /* Added a blue bottom border */
+    }
+
+    .nav-link {
+      margin: 0 1rem;
+      font-weight: 900;
+      font-size: 2rem;
+      color: #007bff; /* Changed link color to blue */
+      text-decoration: none;
+      transition: all 0.3s ease; /* Added transition effect */
+    }
+
+    .nav-link:hover {
+      text-decoration: underline;
+      color: #fff; /* Changed link color to white on hover */
+    }
+
+    .section {
+      height: 100vh; /* Set section height to viewport height */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .feature {
+      padding: 1rem;
+      border: 1px solid #333;
+      border-radius: 5px;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-title {
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    .faqs {
+      margin-top: 2rem;
+    }
+
+    .faq {
+      margin-bottom: 1rem;
+    }
+
+    .faq-question {
+      font-size: 2rem;
+      font-weight: 500;
+      color: #007bff;
+    }
+
+    .faq-answer {
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+
+    .tagline {
+      font-size: 1.5rem; /* Increased font size */
+      font-weight: 500;
+      color: #fff;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 1.5rem 3rem; /* Increased button padding */
+      border-radius: 8px; /* Increased border radius */
+      font-size: 1.5rem; /* Increased font size */
+      font-weight: 500;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+
+    .section-title {
+      font-size: 4rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #007bff;
+      text-align: center;
+    }
+    
+    #home {
+      margin-top: -6rem; /* Adjusted negative margin-top to reduce distance between nav-links and home section */
+    }
+    #features {
+      margin-top: -10rem; /* Adjusted negative margin-top to reduce distance between nav-links and home section */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+        <div class="logoname">WebChatlify</div>
+         <div class="logophoto">WC</div>
+    </div>
+    <div class="nav-links">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+    </div>
+    <div id="home" class="section">
+      <div class="tagline">Join the conversation without revealing your identity. Chat with others anonymously in a safe and unrestricted environment.</div>
+      <div class="tagline">Chat anonymously with others now!</div>
+      <div class="tagline">Experience the freedom of expressing yourself without any restrictions. Start chatting with like-minded individuals today.</div>
+      <div class="button-container">
+        <a class="button">Chat Now</a>
+      </div>
+    </div>
+    <div id="features" class="section">
+      <div class="section-title">Key Features of WebChatlify</div>
+      <div class="features">
+        <div class="feature">
+          <i class="fas fa-user-lock feature-icon"></i>
+          <div class="feature-title">No Login</div>
+        </div>
+        <div class="feature">
+          <i class="fas fa-user-secret feature-icon"></i>
+          <div class="feature-title">Anonymous Identity</div>
+        </div>
+        <div class="feature">
+          <i class="fas fa-users feature-icon"></i>
+          <div class="feature-title">Group Chatting</div>
+        </div>
+        <div class="feature">
+          <i class="fas fa-bullhorn feature-icon"></i>
+          <div class="feature-title">No Restriction on Type of Speech</div>
+        </div>
+      </div>
+    </div>
+    <div id="faq" class="section">
+      <div class="section-title">Frequently Asked Questions</div>
+      <div class="faqs">
+        <div class="faq">
+          <div class="faq-question">Is my identity safe on WebChatlify?</div>
+          <div class="faq-answer">Yes, WebChatlify ensures complete anonymity for all users. Your identity will not be revealed to anyone.</div>
+        </div>
+        <div class="faq">
+          <div class="faq-question">Are there any restrictions on the topics for chatting?</div>
+          <div class="faq-answer">WebChatlify encourages respectful and positive conversations. However, there are no restrictions on any topics because we believe in free speech.</div>
+        </div>
+          <div class="faq">
+          <div class="faq-question">How can I start chatting on WebChatlify?</div>
+          <div class="faq-answer">Simply click on the 'Chat Now' button on the homepage to begin anonymous chatting with other users.</div>
+        </div>
+          <div class="faq">
+          <div class="faq-question">Is there a limit on the number of chats I can have?</div>
+          <div class="faq-answer">There is no limit on the number of chats you can have on WebChatlify. Feel free to engage in multiple conversations at once.</div>
+        </div>

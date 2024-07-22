@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>WEBCHATLIFY</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+    integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+    crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+    integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+    integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+    crossorigin="anonymous"></script>
+  <script src="/socket.io/socket.io.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-image: url('bg_image.jpg'); /* Update the background image URL */
+      background-size: cover; /* Cover the entire background */
+      background-position: center; /* Center the background image */
+      background-repeat: no-repeat; /* Do not repeat the background image */
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 5rem; /* Increased font size for WebChatlify */
+      margin-bottom: 2rem; /* Added some margin below the header */
+    }
+
+    .logophoto {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      height: 80px;
+      background-color: #0a66c8;
+      color: #fff;
+      font-size: 2.75rem;
+      font-weight: 900;
+      border-radius: 5px;
+    }
+
+    .logoname {
+      font-weight: 900;
+      color: #fff;
+      margin-right: 20px; /* Added margin-right for horizontal spacing */
+    }
+
+    .jumbotron {
+      background-color: rgba(10, 102, 200, 0.8); /* Adjusted background color */
+      padding: 2rem;
+      border-radius: 10px;
+    }
+
+    .display-4 {
+      font-size: 3rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      color: #fff; /* Adjusted text color */
+    }
+
+    .form-control {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 5px;
+      padding: 1rem;
+      background-color: rgba(255, 255, 255, 0.8); /* Adjusted input background color */
+      color: #000; /* Adjusted input text color */
+    }
+
+    #message {
+      height: 150px;
+    }
+
+    .btn-success {
+      font-size: 1.5rem;
+      padding: 1rem 3rem;
+      border-radius: 5px;
+      background-color: #007bff; /* Adjusted button background color */
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-success:hover {
+      background-color: #0056b3; /* Adjusted button hover background color */
+    }
+
+    #messages {
+      margin-top: 2rem;
+    }
+
+    #messages h4 {
+      font-size: 2rem;
+      font-weight: 500;
+      color: #007bff; /* Adjusted message sender text color */
+    }
+
+    #messages p {
+      font-size: 1.5rem;
+      color: #fff; /* Adjusted message text color */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logoname">WebChatlify</div>
+      <div class="logophoto">WC</div>
+    </div>
+    <div class="jumbotron">
+      <h1 class="display-4">Send Your Message</h1>
+      <br>
+      <input id="name" class="form-control" placeholder="Name">
+      <br>
+      <textarea id="message" class="form-control" placeholder="Your Message Here"></textarea>
+      <br>
+      <button id="send" class="btn btn-success">Send</button>
+    </div>
+    <div id="messages">
+
+    </div>
+  </div>
+  <script>
+    var port = location.port;
+    var url = window.location.href;
+    var domain = (new URL(url));
+    domain = domain.hostname + (port == 80 ? "" : ":" + port);
+
+    // Add event listener to the name input field
+    $(document).ready(function () {
+      $("#name").on('input', function () {
+        localStorage.setItem('username', $(this).val()); // Store the username in local storage
+      });
+
+      // Set the value of name input field from local storage if available
+      var savedUsername = localStorage.getItem('username');
+      if (savedUsername) {
+        $("#name").val(savedUsername);
+      }
+    });
+
+    var socket = io();
+    $(() => {
+      $("#send").click(() => {
+        sendMessage({
+          name: $("#name").val(),
+          message: $("#message").val()
+        });
+      })
+
+      getMessages()
+    })
+
+    socket.on('message', addMessages)
+
+    function addMessages(message) {
+      $("#messages").append(`<h4> ${message.name} </h4> <p> ${message.message} </p>`)
+    }
+
+    function getMessages() {
+      $.get(`http://${domain}/messages`, (data) => {
+        data.forEach(addMessages);
+      })
+    }
+
+    function sendMessage(message) {
+      $.post(`http://${domain}/messages`, message)
+    }
+  </script>
+</body>
+
+</html>
